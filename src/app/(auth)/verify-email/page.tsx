@@ -3,8 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import { VerifyEmailInvalid } from "./[token]/components/verify-email-invalid";
 import { VerifyEmailSuccess } from "./[token]/components/verify-email-success";
+import { Suspense } from "react";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
 
@@ -13,4 +14,12 @@ export default function VerifyEmailPage() {
   }
 
   return <VerifyEmailSuccess email={email} />;
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense>
+      <VerifyEmailContent />
+    </Suspense>
+  );
 }

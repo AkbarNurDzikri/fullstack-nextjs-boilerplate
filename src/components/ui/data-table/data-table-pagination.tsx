@@ -112,7 +112,7 @@ export const DataTablePagination = ({
             return (
               <Button
                 key={p}
-                variant={page === p ? "emerald" : "outline"}
+                variant={page === p ? "default" : "outline"}
                 size="sm"
                 onClick={() => onPageChange(p)}
                 className={`w-9 h-9 text-sm font-semibold transition-all ${
