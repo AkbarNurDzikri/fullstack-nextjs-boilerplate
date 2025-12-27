@@ -1,0 +1,288 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  email         String     @unique
+  password      String
+  emailVerified DateTime?
+  image         String?
+  isActive      Boolean    @default(false)
+  lastLogin     DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  roles         UserRole[]
+
+  // Audit Relations
+  createdGangs     Gang[]           @relation("GangCreatedBy")
+  updatedGangs     Gang[]           @relation("GangUpdatedBy")
+  createdHouses    Rumah[]          @relation("RumahCreatedBy")
+  updatedHouses    Rumah[]          @relation("RumahUpdatedBy")
+  createdFamilies  Keluarga[]       @relation("KeluargaCreatedBy")
+  updatedFamilies  Keluarga[]       @relation("KeluargaUpdatedBy")
+  createdResidents Penduduk[]       @relation("PendudukCreatedBy")
+  updatedResidents Penduduk[]       @relation("PendudukUpdatedBy")
+  createdMutations MutasiPenduduk[] @relation("MutationCreatedBy")
+  updatedMutations MutasiPenduduk[] @relation("MutationUpdatedBy")
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  permissions RolePermission[]
+  users       UserRole[]
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  roles       RolePermission[]
+}
+
+model UserRole {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  roleId String
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId       String
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  permissionId String
+
+  @@id([roleId, permissionId])
+}
+
+model VerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, token])
+}
+
+// --- SISTEM DATA KEPENDUDUKAN (INDONESIAN FIELDS, ENGLISH RELATIONS) ---
+
+enum StatusRumah {
+  KOSONG
+  DIHUNI
+  DIKONTRAKKAN
+  DIJUAL
+  RENOVASI
+}
+
+enum StatusPenduduk {
+  AKTIF
+  PINDAH
+  MENINGGAL
+  SEMENTARA
+}
+
+enum JenisKelamin {
+  LAKI_LAKI
+  PEREMPUAN
+}
+
+enum Pendidikan {
+  TIDAK_SEKOLAH
+  SD
+  SMP
+  SMA
+  D1
+  D2
+  D3
+  S1
+  S2
+  S3
+}
+
+enum StatusPernikahan {
+  BELUM_KAWIN
+  KAWIN
+  CERAI_HIDUP
+  CERAI_MATI
+}
+
+enum Agama {
+  ISLAM
+  KRISTEN
+  KATOLIK
+  HINDU
+  BUDDHA
+  KHONGHUCU
+}
+
+enum HubunganKeluarga {
+  KEPALA_KELUARGA
+  ISTRI
+  ANAK
+  ORANG_TUA
+  MERTUA
+  CUCU
+  FAMILI_LAIN
+  LAINNYA
+}
+
+enum RentangPenghasilan {
+  TIDAK_ADA
+  DI_BAWAH_1JT
+  ANTARA_1JT_3JT
+  ANTARA_3JT_5JT
+  ANTARA_5JT_10JT
+  DI_ATAS_10JT
+}
+
+model Gang {
+  id        String  @id @default(cuid())
+  nama      String  @unique // Misal: "Gang Mawar", "Blok A"
+  deskripsi String?
+
+  // Relations
+  ketuaId String?   @unique
+  leader  Penduduk? @relation("GangLeader", fields: [ketuaId], references: [id])
+  houses  Rumah[]
+
+  // Audit
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String
+  createdBy   User     @relation("GangCreatedBy", fields: [createdById], references: [id])
+  updatedById String
+  updatedBy   User     @relation("GangUpdatedBy", fields: [updatedById], references: [id])
+}
+
+model Rumah {
+  id     String      @id @default(cuid())
+  nomor  String      @unique // Misal: "A-12"
+  alamat String?
+  status StatusRumah @default(KOSONG)
+
+  // Relations
+  gangId    String
+  gang      Gang             @relation(fields: [gangId], references: [id], onDelete: Cascade)
+  families  Keluarga[]
+  movements MutasiPenduduk[]
+
+  // Audit
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String
+  createdBy   User     @relation("RumahCreatedBy", fields: [createdById], references: [id])
+  updatedById String
+  updatedBy   User     @relation("RumahUpdatedBy", fields: [updatedById], references: [id])
+
+  @@unique([gangId, nomor])
+}
+
+model Keluarga {
+  id                  String         @id @default(cuid())
+  nomorKK             String         @unique
+  alamatLama          String? // Alamat asal sebelum pindah ke perumahan
+  sudahUpdateDomisili Boolean        @default(false)
+  status              StatusPenduduk @default(AKTIF)
+
+  // Relations
+  rumahId String
+  house   Rumah      @relation(fields: [rumahId], references: [id])
+  members Penduduk[]
+
+  // Audit
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String
+  createdBy   User     @relation("KeluargaCreatedBy", fields: [createdById], references: [id])
+  updatedById String
+  updatedBy   User     @relation("KeluargaUpdatedBy", fields: [updatedById], references: [id])
+}
+
+model Penduduk {
+  id               String           @id @default(cuid())
+  nik              String           @unique
+  nama             String
+  tempatLahir      String
+  tanggalLahir     DateTime
+  jenisKelamin     JenisKelamin
+  agama            Agama
+  pendidikan       Pendidikan
+  golonganDarah    String? // Misal: "A", "B", "AB", "O"
+  statusPernikahan StatusPernikahan
+  tanggalNikah     DateTime?
+  pekerjaan        String?
+  kewarganegaraan  String           @default("WNI")
+  namaAyah         String?
+  namaIbu          String?
+  hubunganKeluarga HubunganKeluarga
+
+  // Ekonomi & Pekerjaan
+  apakahBekerja      Boolean            @default(false)
+  penghasilanBulanan RentangPenghasilan @default(TIDAK_ADA)
+
+  status        StatusPenduduk @default(AKTIF)
+  tanggalMasuk  DateTime       @default(now())
+  tanggalKeluar DateTime?
+  alasanKeluar  String?
+
+  // Relations
+  keluargaId String
+  family     Keluarga         @relation(fields: [keluargaId], references: [id], onDelete: Cascade)
+  ledGang    Gang?            @relation("GangLeader")
+  movements  MutasiPenduduk[]
+
+  // Audit
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String
+  createdBy   User     @relation("PendudukCreatedBy", fields: [createdById], references: [id])
+  updatedById String
+  updatedBy   User     @relation("PendudukUpdatedBy", fields: [updatedById], references: [id])
+}
+
+model MutasiPenduduk {
+  id          String   @id @default(cuid())
+  tanggal     DateTime @default(now())
+  jenisMutasi String // "MASUK", "KELUAR", "PINDAH_INTERNAL"
+  alasan      String?
+
+  // Relations
+  pendudukId String
+  resident   Penduduk @relation(fields: [pendudukId], references: [id], onDelete: Cascade)
+  rumahId    String?
+  house      Rumah?   @relation(fields: [rumahId], references: [id])
+
+  // Audit
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String
+  createdBy   User     @relation("MutationCreatedBy", fields: [createdById], references: [id])
+  updatedById String
+  updatedBy   User     @relation("MutationUpdatedBy", fields: [updatedById], references: [id])
+}
