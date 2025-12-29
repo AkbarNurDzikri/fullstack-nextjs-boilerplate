@@ -93,7 +93,7 @@ export const FormInput = <T extends FieldValues>({
               />
 
               {suffixIcon && (
-                <span className="absolute right-3 text-gray-400 flex items-center pointer-events-none">
+                <span className="absolute right-3 text-gray-400 flex items-center">
                   {suffixIcon}
                 </span>
               )}

@@ -29,8 +29,8 @@ export function RecentLogins({ users, loading = false }: RecentLoginsProps) {
             Latest user logins across the system
           </p>
         </div>
-        <div className="p-2 bg-emerald-500/10 rounded-xl">
-          <LogIn size={20} className="text-emerald-600" />
+        <div className="p-2 bg-primary/10 rounded-xl">
+          <LogIn size={20} className="text-primary" />
         </div>
       </CardHeader>
       <CardContent>
@@ -53,7 +53,7 @@ export function RecentLogins({ users, loading = false }: RecentLoginsProps) {
             users?.map((user) => (
               <div key={user.id} className="flex items-center gap-4 group">
                 <div className="relative">
-                  <div className="h-10 w-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-emerald-500/50 transition-all">
+                  <div className="h-10 w-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-primary/50 transition-all">
                     {user.image ? (
                       <img
                         src={user.image}
@@ -66,7 +66,7 @@ export function RecentLogins({ users, loading = false }: RecentLoginsProps) {
                       </span>
                     )}
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-emerald-500 border-2 border-white dark:border-zinc-950 rounded-full" />
+                  <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-primary border-2 border-white dark:border-zinc-950 rounded-full" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100 truncate">

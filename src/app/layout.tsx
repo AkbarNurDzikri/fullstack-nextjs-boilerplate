@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeProviderWrapper } from "@/components/theme-provider-wrapper";
 import { GlobalModal } from "@/components/ui/global-modal";
 import { Toaster } from "sonner";
 
@@ -37,11 +38,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>
-            {children}
-            <GlobalModal />
-            <Toaster position="top-right" richColors />
-          </QueryProvider>
+          <ThemeProviderWrapper>
+            <QueryProvider>
+              {children}
+              <GlobalModal />
+              <Toaster position="top-right" richColors />
+            </QueryProvider>
+          </ThemeProviderWrapper>
         </ThemeProvider>
       </body>
     </html>

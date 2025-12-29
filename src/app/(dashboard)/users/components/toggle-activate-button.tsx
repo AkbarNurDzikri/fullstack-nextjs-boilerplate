@@ -24,7 +24,7 @@ export const ToggleActivateButton = ({
   const { mutate, isPending } = useToggleActivateMutation(isActive, userName);
   const classButton = isActive
     ? "bg-orange-100 text-orange-500 hover:bg-orange-500 hover:text-white"
-    : "bg-emerald-100 text-emerald-500 hover:bg-emerald-500 hover:text-white";
+    : "bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground";
 
   return (
     <Button

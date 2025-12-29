@@ -25,7 +25,7 @@ export function UserRoleForm({ userId }: UserRoleFormProps) {
     return (
       <Card className="border-0 shadow-none bg-transparent">
         <CardContent className="flex justify-center p-10">
-          <Loader2 className="animate-spin text-emerald-500" size={32} />
+          <Loader2 className="animate-spin text-primary" size={32} />
         </CardContent>
       </Card>
     );
@@ -57,7 +57,7 @@ export function UserRoleForm({ userId }: UserRoleFormProps) {
                           className={cn(
                             "p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between shadow-none",
                             isSelected
-                              ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-500/10"
+                              ? "border-primary bg-primary/10 dark:bg-primary/10"
                               : "border-zinc-100 dark:border-zinc-800 hover:border-zinc-200"
                           )}
                         >
@@ -70,8 +70,11 @@ export function UserRoleForm({ userId }: UserRoleFormProps) {
                             </p>
                           </div>
                           {isSelected && (
-                            <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center">
-                              <Shield size={14} className="text-white" />
+                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                              <Shield
+                                size={14}
+                                className="text-primary-foreground"
+                              />
                             </div>
                           )}
                         </Card>
@@ -88,7 +91,7 @@ export function UserRoleForm({ userId }: UserRoleFormProps) {
             <Button
               type="submit"
               disabled={saving}
-              className="flex-1 font-bold rounded-2xl shadow-lg shadow-emerald-100 dark:shadow-none flex items-center justify-center gap-2 hover:cursor-pointer w-1/2"
+              className="flex-1 font-bold rounded-2xl shadow-lg shadow-primary/20 dark:shadow-none flex items-center justify-center gap-2 hover:cursor-pointer w-1/2"
               size={`lg`}
             >
               {saving && <Loader2 className="animate-spin" size={20} />}

@@ -2,6 +2,7 @@
 
 import { Form } from "@/components/ui/form";
 import { FormInput } from "@/components/ui/form-controls";
+import { PasswordInput } from "@/components/ui/password-input";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,10 +32,9 @@ export default function LoginForm() {
             disabled={isPending}
           />
           <div className="space-y-1">
-            <FormInput
+            <PasswordInput
               name="password"
               label="Password"
-              type="password"
               placeholder="••••••••"
               form={form}
               disabled={isPending}
@@ -42,7 +42,7 @@ export default function LoginForm() {
             <div className="flex justify-end px-1">
               <Link
                 href="/forgot-password"
-                className="text-xs font-semibold text-emerald-600 hover:text-emerald-500 transition-colors"
+                className="text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
               >
                 Forgot Password?
               </Link>
@@ -53,7 +53,7 @@ export default function LoginForm() {
           type="submit"
           size={`lg`}
           disabled={isPending}
-          className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 transition-all shadow-lg shadow-emerald-200 dark:shadow-none flex items-center justify-center gap-2 hover:cursor-pointer"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 transition-all shadow-lg shadow-primary/20 dark:shadow-none flex items-center justify-center gap-2 hover:cursor-pointer"
         >
           {isPending && <Loader2 className="animate-spin" size={20} />}
           Sign In
@@ -66,7 +66,7 @@ export default function LoginForm() {
             </span>
             <Link
               href="/register"
-              className="font-semibold text-emerald-600 hover:text-emerald-500"
+              className="font-semibold text-primary hover:text-primary/80"
             >
               Register
             </Link>

@@ -14,7 +14,7 @@ export const getUserColumns = (): DataTableColumn<User>[] => [
       <span
         className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-wider ${
           row.emailVerified
-            ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400"
+            ? "bg-primary/10 text-primary dark:bg-primary/10 dark:text-primary"
             : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
         }`}
       >
@@ -29,7 +29,7 @@ export const getUserColumns = (): DataTableColumn<User>[] => [
       <span
         className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-wider ${
           row.isActive
-            ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400"
+            ? "bg-primary/10 text-primary dark:bg-primary/10 dark:text-primary"
             : "bg-orange-100 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400"
         }`}
       >
@@ -56,7 +56,7 @@ export const getUserColumns = (): DataTableColumn<User>[] => [
     header: "Roles",
     render: (row: any) => (
       <div className="flex items-center gap-1.5">
-        <div className="px-2 py-1 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 rounded-lg text-xs font-black">
+        <div className="px-2 py-1 bg-primary/10 dark:bg-primary/10 text-primary rounded-lg text-xs font-black">
           {row._count?.roles || 0}
         </div>
         <span className="text-xs text-zinc-500 font-bold tracking-tighter">

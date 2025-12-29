@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { ThemeCustomizer } from "@/components/theme-customizer";
 
 export const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -18,7 +19,10 @@ export const Header = () => {
   return (
     <header className="h-16 lg:h-20 px-4 md:px-8 border-b border-zinc-100 dark:border-zinc-900 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md flex items-center justify-between sticky top-0 z-30 transition-all">
       <div className="flex items-center gap-3 ml-auto">
-        {/* Theme Toggler - Only render after mount to prevent hydration mismatch */}
+        {/* Color Theme Customizer */}
+        {mounted && <ThemeCustomizer />}
+
+        {/* Light/Dark Mode Toggle - Only render after mount to prevent hydration mismatch */}
         {mounted && (
           <div className="flex items-center bg-zinc-100/50 dark:bg-zinc-900/50 p-1 rounded-xl border border-zinc-200/50 dark:border-zinc-800/50">
             <Button

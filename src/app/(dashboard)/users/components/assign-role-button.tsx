@@ -22,7 +22,7 @@ export function AssignRoleButton({ row }: Props) {
           content: <UserRoleForm userId={row.id} />,
         })
       }
-      className="font-bold flex items-center gap-2 dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:cursor-pointer bg-emerald-100 text-emerald-600 hover:bg-emerald-500 hover:text-white"
+      className="font-bold flex items-center gap-2 dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:cursor-pointer bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground"
     >
       <Shield size={16} />
       Assign Role

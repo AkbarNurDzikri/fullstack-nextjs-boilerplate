@@ -50,20 +50,20 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-700 pb-10">
       {/* Welcome Banner */}
-      <Card className="border-none bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-2xl shadow-emerald-200 dark:shadow-emerald-900/40 relative overflow-hidden group">
+      <Card className="border-none bg-primary text-primary-foreground shadow-2xl shadow-primary/20 dark:shadow-primary/40 relative overflow-hidden group">
         <CardContent className="p-8 relative z-10">
           <h1 className="text-3xl font-black tracking-tighter mb-2">
             Welcome back, <br className="md:hidden" /> {user?.name || "User"}!
           </h1>
-          <p className="text-emerald-50/80 text-lg max-w-xl leading-relaxed">
+          <p className="text-primary-foreground/80 text-lg max-w-xl leading-relaxed">
             You are currently logged in as
-            <span className="font-bold text-white ml-2 bg-white/20 px-3 py-1 rounded-full whitespace-nowrap">
+            <span className="font-bold text-primary-foreground ml-2 bg-primary-foreground/20 px-3 py-1 rounded-full whitespace-nowrap">
               {user?.isSuperAdmin ? "Super Admin" : user?.roles?.[0] || "User"}
             </span>
           </p>
         </CardContent>
-        <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700" />
-        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-48 h-48 bg-emerald-400/20 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-1000" />
+        <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-primary-foreground/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700" />
+        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-48 h-48 bg-primary-foreground/20 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-1000" />
       </Card>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
@@ -71,7 +71,7 @@ export default function DashboardPage() {
         <div className="xl:col-span-2 space-y-8">
           <section>
             <h2 className="text-lg font-black tracking-tight text-zinc-900 dark:text-white mb-4 uppercase flex items-center gap-2">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+              <div className="w-2 h-2 bg-primary rounded-full" />
               General Overview
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -101,7 +101,7 @@ export default function DashboardPage() {
 
           <section>
             <h2 className="text-lg font-black tracking-tight text-zinc-900 dark:text-white mb-4 uppercase flex items-center gap-2">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+              <div className="w-2 h-2 bg-primary rounded-full" />
               User Status Breakdown
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

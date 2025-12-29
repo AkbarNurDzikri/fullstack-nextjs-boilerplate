@@ -39,7 +39,7 @@ export function ResendVerification({ email }: { email: string }) {
         type="button"
         onClick={handleResend}
         disabled={loading}
-        className="text-xs font-bold text-zinc-500 hover:text-emerald-600 transition-colors disabled:opacity-50 cursor-pointer"
+        className="text-xs font-bold text-zinc-500 hover:text-primary transition-colors disabled:opacity-50 cursor-pointer"
       >
         {loading ? "Sending..." : "Resend Verification Email"}
       </button>

@@ -11,6 +11,14 @@ const transporter = nodemailer.createTransport({
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 const APP_NAME = "Next FullStack";
 
+/**
+ * NOTE: Email templates use hardcoded color #10b981 (emerald-600) instead of theme colors.
+ * This is intentional because:
+ * 1. Email clients don't support CSS variables
+ * 2. Emails need consistent branding regardless of recipient's theme preference
+ * 3. Most email clients have limited CSS support
+ */
+
 export async function sendVerificationEmail(email: string, token: string) {
   const verificationUrl = `${APP_URL}/verify-email/${token}`;
 

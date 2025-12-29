@@ -14,7 +14,7 @@ export function RoleCreateButton() {
           className: "max-w-3/4",
         })
       }
-      className="bg-emerald-600 text-white font-black transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-200 dark:shadow-none hover:cursor-pointer dark:hover:bg-white dark:hover:text-black"
+      className="bg-primary text-primary-foreground font-black transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-primary/20 dark:shadow-none hover:cursor-pointer dark:hover:bg-white dark:hover:text-black"
     >
       Create Role
     </Button>

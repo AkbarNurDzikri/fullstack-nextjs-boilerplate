@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { menuItems } from "./menu-item";
 import { useSidebar } from "../hooks/use-sidebar";
+import { ThemeCustomizer } from "@/components/theme-customizer";
 
 export const Sidebar = () => {
   const {
@@ -41,11 +42,13 @@ export const Sidebar = () => {
       {!isMobileOpen && (
         <header className="fixed top-0 left-0 right-0 h-16 lg:hidden z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-900 px-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-200 dark:shadow-none">
-              <span className="text-white font-black text-[10px]">NF</span>
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20 dark:shadow-none">
+              <span className="text-primary-foreground font-black text-[10px]">
+                NF
+              </span>
             </div>
             <h1 className="text-sm font-black text-zinc-900 dark:text-white tracking-tighter uppercase">
-              NEXT<span className="text-emerald-600">FULLSTACK</span>
+              NEXT<span className="text-primary">FULLSTACK</span>
             </h1>
           </div>
           <button
@@ -72,7 +75,7 @@ export const Sidebar = () => {
               variant="ghost"
               size="sm"
               onClick={toggleSidebar}
-              className="h-8 w-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-lg hover:shadow-emerald-200 dark:hover:shadow-emerald-900/20 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center p-0 group/toggle hover:cursor-pointer"
+              className="h-8 w-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-lg hover:shadow-primary/20 dark:hover:shadow-primary/20 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center p-0 group/toggle hover:cursor-pointer"
             >
               <div
                 className={cn(
@@ -85,8 +88,8 @@ export const Sidebar = () => {
                   className={cn(
                     "transition-colors",
                     isSidebarCollapsed
-                      ? "text-emerald-600"
-                      : "text-zinc-400 group-hover/toggle:text-emerald-600"
+                      ? "text-primary"
+                      : "text-zinc-400 group-hover/toggle:text-primary"
                   )}
                 />
               </div>
@@ -105,8 +108,10 @@ export const Sidebar = () => {
                 showInline ? "w-auto" : "w-20 justify-center gap-0"
               )}
             >
-              <div className="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center shrink-0 shadow-lg shadow-emerald-200 dark:shadow-none hover:scale-105 transition-transform">
-                <span className="text-white font-black text-sm">NF</span>
+              <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20 dark:shadow-none hover:scale-105 transition-transform">
+                <span className="text-primary-foreground font-black text-sm">
+                  NF
+                </span>
               </div>
               <h1
                 className={cn(
@@ -116,7 +121,7 @@ export const Sidebar = () => {
                     : "opacity-100 w-auto"
                 )}
               >
-                NEXT<span className="text-emerald-600">FULLSTACK</span>
+                NEXT<span className="text-primary">FULLSTACK</span>
               </h1>
             </div>
 
@@ -171,7 +176,7 @@ export const Sidebar = () => {
                           ? "justify-center px-0"
                           : "justify-between px-4",
                         isAnyChildActive
-                          ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 shadow-sm shadow-emerald-100/50 dark:shadow-none"
+                          ? "bg-primary/10 text-primary dark:bg-primary/10 shadow-sm shadow-primary/10 dark:shadow-none"
                           : "text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 hover:text-zinc-900 dark:hover:text-zinc-100"
                       )}
                     >
@@ -180,7 +185,7 @@ export const Sidebar = () => {
                         className={cn(
                           "transition-all shrink-0",
                           isAnyChildActive
-                            ? "text-emerald-600"
+                            ? "text-primary"
                             : "group-hover/item:text-zinc-900 dark:group-hover/item:text-zinc-100"
                         )}
                       />
@@ -204,7 +209,7 @@ export const Sidebar = () => {
                         <div className="invisible group-hover/item:visible opacity-0 group-hover/item:opacity-100 transition-all duration-300 absolute left-full top-0 ml-4 z-50">
                           <div className="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl shadow-2xl p-2 min-w-[200px] backdrop-blur-xl bg-opacity-95 dark:bg-opacity-95">
                             <div className="px-3 py-2 border-b border-zinc-50 dark:border-zinc-800 mb-2">
-                              <span className="text-xs font-black text-emerald-600 uppercase tracking-widest">
+                              <span className="text-xs font-black text-primary uppercase tracking-widest">
                                 {item.name}
                               </span>
                             </div>
@@ -218,7 +223,7 @@ export const Sidebar = () => {
                                     className={cn(
                                       "flex items-center gap-3 px-3 py-2 rounded-xl transition-all group/child text-sm",
                                       isChildActive
-                                        ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 font-bold"
+                                        ? "bg-primary/10 text-primary dark:bg-primary/10 font-bold"
                                         : "text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 hover:text-zinc-900 dark:hover:text-zinc-100"
                                     )}
                                   >
@@ -227,7 +232,7 @@ export const Sidebar = () => {
                                       className={cn(
                                         "transition-all shrink-0",
                                         isChildActive
-                                          ? "text-emerald-600"
+                                          ? "text-primary"
                                           : "group-hover/child:text-zinc-900 dark:group-hover/child:text-zinc-100"
                                       )}
                                     />
@@ -253,7 +258,7 @@ export const Sidebar = () => {
                               className={cn(
                                 "flex items-center gap-3 px-3 py-2 rounded-xl transition-all group text-sm",
                                 isChildActive
-                                  ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 font-bold"
+                                  ? "bg-primary/10 text-primary dark:bg-primary/10 font-bold"
                                   : "text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 hover:text-zinc-900 dark:hover:text-zinc-100"
                               )}
                             >
@@ -262,7 +267,7 @@ export const Sidebar = () => {
                                 className={cn(
                                   "transition-all shrink-0",
                                   isChildActive
-                                    ? "text-emerald-600"
+                                    ? "text-primary"
                                     : "group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
                                 )}
                               />
@@ -288,7 +293,7 @@ export const Sidebar = () => {
                       ? "justify-center px-0"
                       : "justify-between px-4",
                     isActive
-                      ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 shadow-sm shadow-emerald-100/50 dark:shadow-none"
+                      ? "bg-primary/10 text-primary dark:bg-primary/10 shadow-sm shadow-primary/10 dark:shadow-none"
                       : "text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 hover:text-zinc-900 dark:hover:text-zinc-100"
                   )}
                 >
@@ -297,7 +302,7 @@ export const Sidebar = () => {
                     className={cn(
                       "transition-all shrink-0",
                       isActive
-                        ? "text-emerald-600"
+                        ? "text-primary"
                         : "group-hover/item:text-zinc-900 dark:group-hover/item:text-zinc-100"
                     )}
                   />
@@ -323,7 +328,7 @@ export const Sidebar = () => {
                           {item.name}
                         </span>
                         {isActive && (
-                          <div className="mt-1 h-0.5 bg-emerald-500 rounded-full w-full" />
+                          <div className="mt-1 h-0.5 bg-primary rounded-full w-full" />
                         )}
                       </div>
                     </div>
@@ -334,6 +339,16 @@ export const Sidebar = () => {
           </nav>
 
           <div className="p-2 border-t border-zinc-100 dark:border-zinc-900 space-y-2">
+            {/* Theme Customizer for Mobile - Only show on mobile when sidebar is open */}
+            {isMobileOpen && (
+              <div className="lg:hidden px-2 pb-2">
+                <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400 mb-2 px-2">
+                  Theme Color
+                </p>
+                <ThemeCustomizer />
+              </div>
+            )}
+
             <div
               className={cn(
                 "flex items-center gap-3 p-2 rounded-2xl transition-all relative group/item",
@@ -342,7 +357,7 @@ export const Sidebar = () => {
                   : "bg-zinc-50/50 dark:bg-zinc-900/30 justify-start"
               )}
             >
-              <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold shrink-0">
+              <div className="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/10 text-primary flex items-center justify-center font-bold shrink-0">
                 {user?.name?.[0]?.toUpperCase() || "U"}
               </div>
               {showInline && (

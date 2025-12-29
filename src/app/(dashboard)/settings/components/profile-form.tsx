@@ -43,8 +43,8 @@ export function ProfileForm({ initialName }: ProfileFormProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-2">
-        <div className="p-2 bg-emerald-500/10 rounded-lg">
-          <User className="text-emerald-600" size={20} />
+        <div className="p-2 bg-primary/10 rounded-lg">
+          <User className="text-primary" size={20} />
         </div>
         <div>
           <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
@@ -70,7 +70,7 @@ export function ProfileForm({ initialName }: ProfileFormProps) {
           />
           <Button
             type="submit"
-            className="rounded-xl w-full md:w-auto px-8 bg-emerald-600 hover:bg-emerald-700 text-white hover:cursor-pointer"
+            className="rounded-xl w-full md:w-auto px-8 bg-primary hover:bg-primary/90 text-primary-foreground hover:cursor-pointer"
             disabled={loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
